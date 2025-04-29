@@ -1,18 +1,17 @@
 package com.example.basic.service;
 
-import com.example.basic.entity.JoinEntity;
-import com.example.basic.repository.JoinRepo;
+import com.example.basic.entity.MemberEntity;
+import com.example.basic.repository.MemberRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class LoginService {
+    private final MemberRepo memberRepo;
 
-    private final JoinRepo joinRepo;
-
-    // 이름과 이메일을 전달 받아 2개의 정보가 모두 매칭되는 사용자 정보를 DB에서 찾아 반환
-    public JoinEntity checkUser(String uname, String email) {
-        return joinRepo.findByUnameAndEmail(uname, email);
+    // id와 pw를 전달 받아 매칭된 데이터 확인
+    public MemberEntity checkUser(String userid, String password) {
+        return memberRepo.findByUseridAndPassword(userid, password);
     }
 }

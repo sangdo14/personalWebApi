@@ -28,12 +28,20 @@ public class MemberService {
     }
 
     // 회원 삭제
-    public void delete(String userid){
+    public String delete(String userid){
         memberRepo.deleteById(userid);
+        return "삭제 성공";
     }
 
-    // 회원 수정 - 회원 정보 폼 반환
+    // 회원 수정 - 수정할 정보 가져오기
     public MemberEntity getUserByUserid(String userid){
         return memberRepo.findById(userid).orElseThrow(()-> new RuntimeException("해당 아이디의 유저 없음"));
+    }
+
+    // 회원 수정 - 가져온 정보 수정
+    public String updateUser(MemberDTO dto){
+        MemberEntity user = new MemberEntity(dto.getUserid(), dto.getPw1(), dto.getName(), dto.getEmail(), dto.getComments(), null);
+        memberRepo.save(user);
+        return "수정 성공";
     }
 }

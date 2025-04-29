@@ -19,12 +19,6 @@ public class MemberController {
     private final MemberService memberService;
 
     // 회원 정보 저장
-//    @CrossOrigin(
-//            origins = "http://127.0.0.1:5501",
-//            allowedHeaders = "*",
-//            methods = {RequestMethod.POST, RequestMethod.OPTIONS},
-//            allowCredentials = "true"
-//    )
     @PostMapping("/join/create")
     public Map<String, Object> create(@RequestBody MemberDTO memberDTO) {
         String result = memberService.processJoin(memberDTO);
@@ -41,26 +35,36 @@ public class MemberController {
         int pageSize = 10;
         Page<MemberEntity> userPage = memberService.getUsersByPage(page, pageSize);
 
-        Map<String, Object> result = new HashMap<>();
-        result.put("users", userPage.getContent());
-        result.put("currentPage", page);
-        result.put("totalPages", userPage.getTotalPages());
-        return result;
+        Map<String, Object> response = new HashMap<>();
+        response.put("users", userPage.getContent());
+        response.put("currentPage", page);
+        response.put("totalPages", userPage.getTotalPages());
+        return response;
     }
 
     // 회원 삭제
     @DeleteMapping("/admin/del/{userid}")
     public Map<String, String> delUser(@PathVariable String userid){
-        memberService.delete(userid);
+        String result = memberService.delete(userid);
 
-        Map<String, String> result = new HashMap<>();
-        result.put("message", "삭제 성공");
-        return result;
+        Map<String, String> response = new HashMap<>();
+        response.put("message", result);
+        return response;
     }
 
-    // 회원 수정
+    // 회원 수정 - 수정할 정보 가져오기
     @GetMapping("/admin/edit/{userid}")
     public MemberEntity editUser(@PathVariable String userid){
         return memberService.getUserByUserid(userid);
+    }
+
+    // 회원 수정 - 가져온 정보 수정
+    @PutMapping("/admin/update")
+    public Map<String, String> updateUser(@RequestBody MemberDTO memberDTO) {
+        String result = memberService.updateUser(memberDTO);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", result);
+        return response;
     }
 }
