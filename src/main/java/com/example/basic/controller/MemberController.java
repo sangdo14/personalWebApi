@@ -1,10 +1,8 @@
 package com.example.basic.controller;
 import com.example.basic.dto.MemberDTO;
-import com.example.basic.entity.JoinEntity;
 import com.example.basic.entity.MemberEntity;
 import com.example.basic.service.MemberService;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;

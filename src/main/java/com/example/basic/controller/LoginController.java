@@ -1,12 +1,10 @@
 package com.example.basic.controller;
 
 import com.example.basic.dto.LoginDTO;
-import com.example.basic.entity.JoinEntity;
 import com.example.basic.entity.MemberEntity;
 import com.example.basic.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;

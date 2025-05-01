@@ -22,7 +22,5 @@ public class MemberEntity {
     private String name;
     private String email;
     private String intro;
-
-    @Column(name = "created_dt", insertable = false, updatable = false)
     private LocalDateTime created_dt;
 }

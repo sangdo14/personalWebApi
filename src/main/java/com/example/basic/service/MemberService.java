@@ -1,13 +1,14 @@
 package com.example.basic.service;
 
 import com.example.basic.dto.MemberDTO;
-import com.example.basic.entity.JoinEntity;
 import com.example.basic.entity.MemberEntity;
 import com.example.basic.repository.MemberRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +18,7 @@ public class MemberService {
     // 회원가입 db저장
     public String processJoin(MemberDTO dto) {
 
-        MemberEntity user = new MemberEntity(dto.getUserid(), dto.getPw1(), dto.getName(), dto.getEmail(), dto.getComments(), null);
+        MemberEntity user = new MemberEntity(dto.getUserid(), dto.getPw1(), dto.getName(), dto.getEmail(), dto.getComments(), LocalDateTime.now());
         memberRepo.save(user);
         return "회원정보가 저장되었습니다";
     }
